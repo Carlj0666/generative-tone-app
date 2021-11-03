@@ -1,23 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import * as Tone from 'tone';
+
+const synth = new Tone.MembraneSynth().toMaster();
+
+function playSynth() {
+  synth.triggerAttackRelease("C4","8n");
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id='wrapper'>
+      <button id='button' onClick={playSynth}>Click Me</button>
     </div>
   );
 }
