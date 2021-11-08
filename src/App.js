@@ -2,10 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import * as Tone from 'tone';
 
-const synth = new Tone.MembraneSynth().toMaster();
+const memSynth = new Tone.MembraneSynth().toMaster();
+const now = Tone.now()
 
 function playSynth() {
-  synth.triggerAttackRelease("C4","8n");
+  memSynth.triggerAttackRelease("C2","9n", now);
+  memSynth.triggerAttackRelease("C4","9n", now + 0.5);
+  memSynth.triggerAttackRelease("C6","9n", now + 1);
 }
 
 function App() {
