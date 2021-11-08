@@ -4,6 +4,8 @@ import * as Tone from 'tone';
 const memSynth = new Tone.MembraneSynth().toDestination();
 const now = Tone.now()
 // setInterval(() => console.log(Tone.now()), 100);
+const distortion = new Tone.Distortion(1).toDestination();
+memSynth.connect(distortion)
 
 const synthA = new Tone.FMSynth().toDestination();
 const synthB = new Tone.FMSynth().toDestination();
@@ -12,8 +14,13 @@ const loopA = new Tone.Loop(time => {
   synthA.triggerAttackRelease("C2", "8n", time);
 }, "4n").start(0);
 
-function playSynth() {
+const loopB = new Tone.Loop(time => {
+  synthB.triggerAttackRelease("C3", "4n", time);
+}, "4n").start(0);
 
+
+function playSynth() {
+  // Tone.Transport.start()
   document.querySelector('button')?.addEventListener('click', async () => {
     await Tone.start()
     console.log('audio is ready')
@@ -28,9 +35,11 @@ function playSynth() {
 function App() {
 
   return (
+
     <div id='wrapper'>
       <button id='button' onClick={playSynth}>MembraneS</button>
     </div>
+     
   );
 }
 
